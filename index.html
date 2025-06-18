@@ -15,13 +15,14 @@
             
         }
 
-         /* Estilo para el título */
+        /* Estilo para el título */
         h1 {
            text-align: center;
-           font-size: auto; /* Tamaño por defecto para pantallas grandes */
+           font-size: 90%; /* Tamaño por defecto para pantallas grandes */
            margin-top: 20px;
            margin-bottom: 20px;
            color: #333; /* Color del texto */
+
         }
 
 
@@ -35,26 +36,6 @@
              justify-content: center; /* Centrado horizontal */
              align-items: center; /* Centrado vertical */
              background-color: #E7F1F2; /* O el color que desees para el fondo del contenedor */
-
-        /* Media Query para pantallas pequeñas (móviles) */
-        @media (max-width: 600px) {
-         h1 {
-        font-size: 2em;  /* El tamaño del título será más pequeño en móviles */
-        margin-top: 10px;
-        margin-bottom: 10px;
-        }
-            
-        #svgContainer {
-        width: 95%;  /* El SVG ocupará el 95% del ancho de la pantalla en móviles */
-          }
-        }
-
-        /* Media Query para pantallas más grandes (tablets y PC) */
-        @media (min-width: 601px) {
-        #svgContainer {
-        width: 80%;  /* El SVG ocupará el 80% del ancho de la pantalla en tablets y PC */
-          }
-        } 
 
         }
     </style>
@@ -361,7 +342,7 @@
             console.log("Conexión cerrada, intentando 22reconectar...");
             client.reconnect();  // Intentar reconectar automáticamente
         });
-          
+
     </script>
 
 </body>
