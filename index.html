@@ -6,20 +6,6 @@
     <title>Emergency Stop STS 5 MQTT</title>
     <style>
         
-        /* Estilo para el botón */
-        #sendButton {
-            padding: 10px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        #sendButton:hover {
-            background-color: #45a049;
-        }
         /* Estilo para el fondo */
         body {
 
@@ -28,17 +14,6 @@
             padding: 0;
             
         }
-        /* Contenedor general de la página */
-        .container {
-             width: 90%;  /* El contenedor ocupará el 90% del ancho disponible */
-             height: auto;
-             text-align: center;
-             display: flex;
-             flex-direction: column;
-             justify-content: center;
-            align-items: center;
-        }
-
 
         /* Estilo para el SVG */
         #svgContainer {
@@ -52,41 +27,18 @@
              background-color: #E7F1F2; /* O el color que desees para el fondo del contenedor */
 
         /* Media Query para pantallas pequeñas (móviles) */
-        
-@media (max-width: 600px) {
-    .container {
-        width: 95%;  /* El contenedor ocupará el 95% del ancho de la pantalla */
-        padding: 10px;
-    }
-    
-    #svgContainer {
-        width: 100%;  /* El SVG ocupará el 100% del ancho de la pantalla */
-        max-width: 100%;  /* El SVG no tendrá un tamaño máximo */
-        margin-bottom: 10px;  /* Espacio debajo del SVG */
-    }
+        @media (max-width: 600px) {
+        #svgContainer {
+        width: 95%;  /* El SVG ocupará el 95% del ancho de la pantalla en móviles */
+          }
+        }
 
-    #sendButton {
-        width: 100%;  /* El botón ocupará el 100% del ancho en pantallas pequeñas */
-        font-size: 14px;  /* Font size más pequeño para móviles */
-        padding: 12px;  /* Ajuste de tamaño del botón */
-    }
-}
-
-/* Media Query para pantallas más grandes (tablets y PC) */
-@media (min-width: 601px) {
-    .container {
-        width: 80%;  /* El contenedor ocupará el 80% del ancho de la pantalla */
-    }
-    
-    #svgContainer {
-        width: 70%;  /* El SVG ocupará el 70% del contenedor */
-    }
-
-    #sendButton {
-        font-size: 16px;  /* Tamaño de fuente mayor */
-        padding: 10px 20px;  /* Ajuste de tamaño para dispositivos grandes */
-    }
-}
+        /* Media Query para pantallas más grandes (tablets y PC) */
+        @media (min-width: 601px) {
+        #svgContainer {
+        width: 80%;  /* El SVG ocupará el 80% del ancho de la pantalla en tablets y PC */
+          }
+        } 
 
         }
     </style>
@@ -94,9 +46,6 @@
 <body>
 
     <h1>Emergency Stop STS 5 MQTT</h1>
-
-    <!-- Botón para enviar mensaje -->
-    <button id="sendButton">Enviar true a pulsar</button>
 
     <!-- Contenedor para la imagen SVG -->
     <div id="svgContainer">
@@ -396,14 +345,7 @@
             console.log("Conexión cerrada, intentando 22reconectar...");
             client.reconnect();  // Intentar reconectar automáticamente
         });
-
-        // Función para enviar el mensaje 'true' al topic 'pulsar' al hacer clic en el botón
-        document.getElementById('sendButton').addEventListener('click', function() {
-            // Publicar un mensaje 'true' en el topic 'pulsar'
-            client.publish('pulsar', 'true', function() {
-                console.log('Mensaje "true" enviado al topic "pulsar"');
-            });
-        });
+          
     </script>
 
 </body>
