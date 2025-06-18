@@ -29,7 +29,7 @@
         /* Estilo para el SVG */
         #svgContainer {
 
-             width: 80%;
+             width: 100%;
              height: auto;
              margin: 0 auto; /* Esto centra horizontalmente */
              display: flex;
@@ -291,59 +291,63 @@
 
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script>
-        // Conexión al broker MQTT
-        const client = mqtt.connect('wss://mqtt-dashboard.com:8884/mqtt');  // Usar el broker MQTT especificado
+      // Conexión al broker MQTT
+    const client = mqtt.connect('wss://mqtt-dashboard.com:8884/mqtt');  // Usar el broker MQTT especificado
 
-        // Cuando se conecta, suscribirse al tema 'luz'
-        client.on('connect', function () {
-            console.log("Conectado al broker MQTT");
+      // Cuando se conecta, suscribirse al tema 'luz'
+    client.on('connect', function () {
+    console.log("Conectado al broker MQTT");
 
-            // Suscribirse al tema 'luz'
-            client.subscribe('luz', function (err) {
-                if (err) {
-                    console.error("Error al suscribirse:", err);
-                } else {
-                    console.log("Suscripción exitosa al tema 'luz'");
-                }
-            });
+    // Suscribirse al tema 'luz'
+    client.subscribe('luz', function (err) {
+        if (err) {
+            console.error("Error al suscribirse:", err);
+        } else {
+            console.log("Suscripción exitosa al tema 'luz'");
+        }
+    });
 
-            // Suscribirse al tema de control de los elementos SVG
-            client.subscribe('luz', function (err) {
-                if (err) {
-                    console.error("Error al suscribirse al tema 'controlSVG':", err);
-                } else {
-                    console.log("Suscripción exitosa al tema 'controlSVG'");
-                }
-            });
-        });
+    // Recuperar el estado guardado en localStorage
+    const lastState = localStorage.getItem('lastLightState');
+    if (lastState === 'true') {
+        document.getElementById('rect1-86').style.display = 'inline';  // Aparece el recuadro
+    } else {
+        document.getElementById('rect1-86').style.display = 'none';  // Desaparece el recuadro
+    }
+ });
 
-        // Cuando se recibe un mensaje, verificar el estado y cambiar el color de los cuadros y elementos SVG
-        client.on('message', function (topic, message) {
-            console.log("Mensaje recibido en el topic:", topic); // Verificar el topic recibido
-            console.log("Contenido del mensaje:", message.toString()); // Verificar el contenido del mensaje
-        
-            if (topic === 'luz') {
-                // Controlar los elementos SVG con el mensaje recibido para que aparezcan o desaparezcan
-                const msg = message.toString().trim();
+    // Cuando se recibe un mensaje, verificar el estado y cambiar el color de los cuadros y elementos SVG
+client.on('message', function (topic, message) {
+    console.log("Mensaje recibido en el topic:", topic);  // Verificar el topic recibido
+    console.log("Contenido del mensaje:", message.toString());  // Verificar el contenido del mensaje
 
-                if (msg === 'false') {
-                    // Desaparece el recuadro 
-                    document.getElementById('rect1-86').style.display = 'none';
+    if (topic === 'luz') {
+        // Controlar los elementos SVG con el mensaje recibido para que aparezcan o desaparezcan
+        const msg = message.toString().trim();
 
-                } else if (msg === 'true') {
-                    // Aparece el recuadro 
-                    document.getElementById('rect1-86').style.display = 'inline';
-                }
-            }
-        });
+        if (msg === 'false') {
+            // Desaparece el recuadro
+            document.getElementById('rect1-86').style.display = 'none';
+            // Guardar el estado en localStorage
+            localStorage.setItem('lastLightState', 'false');
+        } else if (msg === 'true') {
+            // Aparece el recuadro
+            document.getElementById('rect1-86').style.display = 'inline';
+            // Guardar el estado en localStorage
+            localStorage.setItem('lastLightState', 'true');
+        }
+    }
+});
 
-        // Manejo de reconexión en caso de desconexión
-        client.on('close', function () {
-            console.log("Conexión cerrada, intentando 22reconectar...");
-            client.reconnect();  // Intentar reconectar automáticamente
-        });
+           // Manejo de reconexión en caso de desconexión
+          client.on('close', function () {
+    console.log("Conexión cerrada, intentando reconectar...");
+    client.reconnect();  // Intentar reconectar automáticamente
+});
+
 
     </script>
 
 </body>
 </html>
+
