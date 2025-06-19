@@ -17,8 +17,9 @@
 
         /* Estilo para el título */
         h1 {
+           
            text-align: center;
-           font-size: 100%; /* Tamaño por defecto para pantallas grandes */
+           font-size: 200%; /* Tamaño por defecto para pantallas grandes */
            margin-top: 20px;
            margin-bottom: 20px;
            color: #333; /* Color del texto */
@@ -311,8 +312,16 @@
     const lastState = localStorage.getItem('lastLightState');
     if (lastState === 'true') {
         document.getElementById('rect1-86').style.display = 'inline';  // Aparece el recuadro
+        document.getElementById('rect1-1').style.display = 'inline';  // Aparece el recuadro
+        document.getElementById('rect1-73').style.display = 'inline';  // Aparece el recuadro
+        document.getElementById('rect1-6').style.display = 'inline';  // Aparece el recuadro
+        document.getElementById('rect1-11').style.display = 'inline';  // Aparece el recuadro
     } else {
         document.getElementById('rect1-86').style.display = 'none';  // Desaparece el recuadro
+        document.getElementById('rect1-1').style.display = 'none';  // Desaparece el recuadro
+        document.getElementById('rect1-73').style.display = 'none';  // Desaparece el recuadro
+        document.getElementById('rect1-6').style.display = 'none';  // Desaparece el recuadro
+        document.getElementById('rect1-11').style.display = 'none';  // Desaparece el recuadro
     }
  });
 
@@ -328,11 +337,20 @@ client.on('message', function (topic, message) {
         if (msg === 'false') {
             // Desaparece el recuadro
             document.getElementById('rect1-86').style.display = 'none';
+            
+            document.getElementById('rect1-1').style.display = 'none';  // Desaparece el recuadro
+            document.getElementById('rect1-73').style.display = 'none';  // Desaparece el recuadro
+            document.getElementById('rect1-6').style.display = 'none';  // Desaparece el recuadro
+            document.getElementById('rect1-11').style.display = 'none';  // Desaparece el recuadro
             // Guardar el estado en localStorage
             localStorage.setItem('lastLightState', 'false');
         } else if (msg === 'true') {
             // Aparece el recuadro
             document.getElementById('rect1-86').style.display = 'inline';
+            document.getElementById('rect1-1').style.display = 'inline';  // Aparece el recuadro
+            document.getElementById('rect1-73').style.display = 'inline';  // Aparece el recuadro
+            document.getElementById('rect1-6').style.display = 'inline';  // Aparece el recuadro
+            document.getElementById('rect1-11').style.display = 'inline';  // Aparece el recuadro
             // Guardar el estado en localStorage
             localStorage.setItem('lastLightState', 'true');
         }
@@ -350,4 +368,3 @@ client.on('message', function (topic, message) {
 
 </body>
 </html>
-
